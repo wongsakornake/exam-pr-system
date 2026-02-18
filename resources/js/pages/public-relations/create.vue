@@ -105,28 +105,28 @@
                 <div v-if="currentStep === 3" class="p-6 sm:p-10">
                     <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 text-left">
                         <div class="md:col-span-5 space-y-6">
-                            <h2 class="text-lg font-bold flex items-center gap-2">配信日時の選択</h2>
+                            <h2 class="text-lg font-bold flex items-center gap-2">配信日時</h2>
                             <div class="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800">
                                 <input type="time" value="17:00" class="w-full mt-4 p-3 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-900" />
                             </div>
                         </div>
                         <div class="md:col-span-7">
                             <div class="bg-indigo-50/30 dark:bg-slate-800/40 border border-indigo-100 dark:border-slate-800 rounded-2xl p-6 sm:p-8">
-                                <h2 class="text-lg font-bold mb-6">配信前確認事項</h2>
+                                <h2 class="text-lg font-bold mb-6">各種同意チェック</h2>
                                 <div class="space-y-6">
                                     <label v-for="i in 3" :key="i" class="flex gap-4 cursor-pointer group">
                                         <input type="checkbox" class="w-6 h-6 rounded border-slate-300 text-indigo-600 mt-1" />
                                         <div class="flex-1">
-                                            <p class="font-bold text-sm group-hover:text-indigo-600">確認項目 {{ i }}</p>
-                                            <p class="text-xs text-slate-500 mt-1">รายละเอียดข้อตกลงการใช้งานและการกดยืนยันเพื่อดำเนินการต่อ</p>
+                                            <p class="font-bold text-sm group-hover:text-indigo-600">配信条件、公序良俗など</p>
+                                            <!-- <p class="text-xs text-slate-500 mt-1">รายละเอียดข้อตกลงการใช้งานและการกดยืนยันเพื่อดำเนินการต่อ</p> -->
                                         </div>
                                     </label>
                                 </div>
                                 <div class="mt-10 flex flex-col items-end gap-3">
                                     <p class="text-2xl font-black text-indigo-600">2026年 2月 15日 17:00</p>
-                                    <button class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-xl font-black text-lg shadow-xl shadow-indigo-200 dark:shadow-none transition-all active:scale-95">
-                                        配信予約を確定する
-                                    </button>
+                                    <!-- <button class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-xl font-black text-lg shadow-xl shadow-indigo-200 dark:shadow-none transition-all active:scale-95">
+                                        配信予約ボタン
+                                    </button> -->
                                 </div>
                             </div>
                         </div>
@@ -141,7 +141,7 @@
 
                     <button @click="nextStep"
                         class="px-10 py-2.5 bg-indigo-600 text-white font-black rounded-lg shadow-lg shadow-indigo-200 dark:shadow-none hover:opacity-90 active:scale-95 transition-all">
-                        {{ currentStep === 3 ? '送信を確認する' : '次' }}
+                        {{ currentStep === 3 ? '配信予約ボタン' : '次' }}
                     </button>
                 </div>
             </div>

@@ -40,9 +40,9 @@
                                     <th
                                         class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-400 text-sm whitespace-nowrap">
                                         ステータス</th>
-                                    <th
+                                    <!-- <th
                                         class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-400 text-sm text-right whitespace-nowrap">
-                                        アクション</th>
+                                        アクション</th> -->
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100 dark:divide-slate-800/80">
@@ -61,12 +61,12 @@
                                             承認待ち
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 text-right whitespace-nowrap">
+                                    <!-- <td class="px-6 py-4 text-right whitespace-nowrap">
                                         <button
                                             class="p-2 text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
                                             <span class="material-icons-round text-xl block">more_horiz</span>
                                         </button>
-                                    </td>
+                                    </td> -->
                                 </tr>
 
                                 <tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
@@ -83,12 +83,12 @@
                                             配信前
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 text-right whitespace-nowrap">
+                                    <!-- <td class="px-6 py-4 text-right whitespace-nowrap">
                                         <button
                                             class="p-2 text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
                                             <span class="material-icons-round text-xl block">more_horiz</span>
                                         </button>
-                                    </td>
+                                    </td> -->
                                 </tr>
 
                                 <tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
@@ -105,12 +105,12 @@
                                             配信完了
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 text-right whitespace-nowrap">
+                                    <!-- <td class="px-6 py-4 text-right whitespace-nowrap">
                                         <button
                                             class="p-2 text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
                                             <span class="material-icons-round text-xl block">more_horiz</span>
                                         </button>
-                                    </td>
+                                    </td> -->
                                 </tr>
 
                                 <tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
@@ -127,12 +127,12 @@
                                             配信完了
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 text-right whitespace-nowrap">
+                                    <!-- <td class="px-6 py-4 text-right whitespace-nowrap">
                                         <button
                                             class="p-2 text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
                                             <span class="material-icons-round text-xl block">more_horiz</span>
                                         </button>
-                                    </td>
+                                    </td> -->
                                 </tr>
 
                             </tbody>

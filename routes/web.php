@@ -6,7 +6,7 @@ use Laravel\Fortify\Features;
 
 Route::get('/', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('home');
+})->name('home');
 
 Route::get('admin/public-relations/review', function () {
     return Inertia::render('public-relations/review', [
