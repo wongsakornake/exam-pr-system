@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
+Route::get('/', function () {
+    return Inertia::render('Welcome');
+})->middleware(['auth', 'verified'])->name('home');
+
 Route::get('admin/public-relations/review', function () {
     return Inertia::render('public-relations/review', [
         'canRegister' => Features::enabled(Features::registration()),
