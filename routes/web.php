@@ -3,32 +3,45 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
+use App\Http\Controllers\PublicRelationController;
 
 Route::get('/', function () {
     return Inertia::render('Dashboard');
 })->name('home');
 
-Route::get('admin/public-relations/review', function () {
-    return Inertia::render('public-relations/review', [
-        'canRegister' => Features::enabled(Features::registration()),
-    ]);
-})->name('reviewPR');
 
-Route::get('customer/public-relations/list', function () {
-    return Inertia::render('public-relations/list', [
-        'canRegister' => Features::enabled(Features::registration()),
-    ]);
-})->name('listPR');
+Route::get('customer/public-relations/create', [PublicRelationController::class, 'create'])->name('createPR');
 
-Route::get('customer/public-relations/create', function () {
-    return Inertia::render('public-relations/create', [
-        'canRegister' => Features::enabled(Features::registration()),
-    ]);
-})->name('createPR');
+
+Route::get('/internal-api/target-media-receivers', [PublicRelationController::class, 'getReceiversByArea'])
+    ->name('internal.receivers.index');
+
+Route::post('customer/public-relations', [PublicRelationController::class, 'store'])->name('public-relations.store');
+
+Route::get('admin/public-relations/review', [PublicRelationController::class, 'review'])
+    ->name('public-relations.review');
+
+Route::get('customer/public-relations/list', [PublicRelationController::class, 'list'])
+    ->name('public-relations.list');
+
+Route::get('customer/public-relations/edit', [PublicRelationController::class, 'edit'])
+    ->name('public-relations.edit');
+
+// Route::get('customer/public-relations/create', [PublicRelationController::class, 'create'])->name('createPR');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('example/send-email', function () {
+    return Inertia::render('example/SendEmail', [
+        'canRegister' => Features::enabled(Features::registration()),
+    ]);
+})->name('examSendEmail');
+
+
+use App\Http\Controllers\EmailController;
+Route::post('/send-email', [EmailController::class, 'send'])->name('email.send');
 
 require __DIR__.'/settings.php';
 

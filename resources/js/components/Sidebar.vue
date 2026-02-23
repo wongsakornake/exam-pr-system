@@ -38,12 +38,12 @@
             </Link>
         </nav>
 
-        <div class="p-3 border-t border-slate-200 dark:border-slate-800 space-y-1">
+        <!-- <div class="p-3 border-t border-slate-200 dark:border-slate-800 space-y-1">
             <button class="w-full flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                 <span v-if="isOpen" class="text-sm font-medium">アカウント</span>
             </button>
-        </div>
+        </div> -->
     </aside>
 
     <!-- <button @click="isOpen = true" v-if="!isOpen" 

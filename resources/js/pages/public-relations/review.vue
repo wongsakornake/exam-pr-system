@@ -10,20 +10,35 @@
                     <table class="w-full text-left border-collapse text-sm">
                         <thead>
                             <tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">PRタイトル</th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">申請者</th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">ステータス</th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300 text-right">アクション</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Subject</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Owner</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Created At</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Updated At</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Send At</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Status</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300 text-right">Action</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-                            <tr v-for="item in mockPRs" :key="item.id" class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                             <!-- <tr v-if="publicRelations.data.length === 0">
+                                <td colspan="4" class="px-6 py-10 text-center text-slate-400 text-sm">データがありません</td>
+                            </tr> -->
+                            <tr v-for="(item, index) in publicRelations.data" :key="item.id" class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
                                 <td class="px-6 py-4">
-                                    <div class="font-medium text-slate-800 dark:text-slate-200">{{ item.title }}</div>
-                                    <div class="text-xs text-slate-400 mt-1">{{ item.date }}</div>
+                                    <div class="font-medium text-slate-800 dark:text-slate-200">{{ item.subject }}</div>
+                                    <div class="text-xs text-slate-400 mt-1">Tokyo, Japan — [2026-02-22] — We are proud to announce the launch of "EcoStream," a revolutionary home water purification system designed to reduce plastic waste by 70%. Developed with advanced filtration technology from Japan, EcoStream offers pure, mineral-rich water while maintaining a sleek, minimalist design suitable for modern homes. Our mission is to provide clean water access while protecting our planet's oceans from single-use plastics. EcoStream will be available nationwide starting next month.</div>
                                 </td>
                                 <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
-                                    {{ item.author }}
+                                    user test
+                                </td>
+                                 <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
+                                    23/02/2026
+                                </td>
+                                 <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
+                                    23/02/2026
+                                </td>
+                                 <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
+                                    23/02/2026
                                 </td>
                                 <td class="px-6 py-4">
                                     <span :class="statusClass(item.status)">{{ item.statusText }}</span>
@@ -31,7 +46,7 @@
                                 <td class="px-6 py-4 text-right">
                                     <button @click="openReviewModal(item)" 
                                             class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium rounded transition-colors">
-                                        詳細を確認
+                                       レビュー
                                     </button>
                                 </td>
                             </tr>
@@ -40,7 +55,7 @@
                 </div>
 
                 <div v-if="mockPRs.length === 0" class="p-12 text-center text-slate-500">
-                    現在、レビュー待ちの項目はありません。
+                    情報はありません。
                 </div>
             </div>
         </div>
@@ -56,11 +71,9 @@ import Modal from '@/components/ReviewPrModal.vue';
 
 // Props
 const props = defineProps({
-    canRegister: {
-        type: Boolean,
-        default: false
-    }
+    publicRelations: Object,
 });
+const publicRelations = props.publicRelations ?? [];
 
 // Modal State
 const isModalOpen = ref(false);
