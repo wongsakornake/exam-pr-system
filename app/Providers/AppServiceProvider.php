@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         $this->configureDefaults();
 
         // 2. เพิ่มส่วนนี้เข้าไปด้านล่าง
-        if (config('app.env') !== 'local') {
+        if (config('app.env') !== 'local' || config('app.env') === 'production' || env('RAILWAY_ENVIRONMENT')) {
             URL::forceScheme('https');
         }
     }
