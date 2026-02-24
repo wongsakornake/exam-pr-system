@@ -26,25 +26,40 @@
                             <div>
                                 <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">PRタイトル</label>
                                 <p class="text-sm text-slate-800 dark:text-slate-200 mt-1 font-semibold leading-relaxed">
-                                    {{ data.title }}
+                                    {{ data.subject }}
                                 </p>
                             </div>
 
                             <div class="grid grid-cols-2 gap-6">
                                 <div>
-                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">申請者</label>
-                                    <p class="text-sm text-slate-800 dark:text-slate-200 mt-1">{{ data.author }}</p>
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Owner</label>
+                                    <p class="text-sm text-slate-800 dark:text-slate-200 mt-1">user test</p>
                                 </div>
                                 <div>
-                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">申請日</label>
-                                    <p class="text-sm text-slate-800 dark:text-slate-200 mt-1">{{ data.date }}</p>
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Created at</label>
+                                    <p class="text-sm text-slate-800 dark:text-slate-200 mt-1">{{ formatDate(data.created_at) }}</p>
+                                </div>
+                                <div>
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Status</label>
+                                    <p class="text-sm text-slate-800 dark:text-slate-200 mt-1">{{ data.status }}</p>
+                                </div>
+                                <div>
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Updated at</label>
+                                    <p class="text-sm text-slate-800 dark:text-slate-200 mt-1">{{ formatDate(data.updated_at) }}</p>
+                                </div>
+                                <div>
+                                    
+                                </div>
+                                <div>
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Sent at</label>
+                                    <p class="text-sm text-slate-800 dark:text-slate-200 mt-1">{{ formatDate(data.sent_at) }}</p>
                                 </div>
                             </div>
 
                             <div>
-                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">内容本文</label>
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Content</label>
                                 <div class="mt-2 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg text-sm text-slate-600 dark:text-slate-400 h-40 overflow-y-auto border border-slate-100 dark:border-slate-700/50 leading-relaxed">
-                                    こちらは「{{ data.title }}」のプレスリリース詳細内容です。サンプルのテキストがここに入ります。
+                                    {{ data.content }}
                                 </div>
                             </div>
                         </div>
@@ -93,6 +108,19 @@ const maxWidthClass = computed(() => {
         '2xl': 'max-w-2xl',
     }[props.maxWidth];
 });
+
+const formatDate = (dateStr) => {
+    if (!dateStr) return '-';
+    const d = new Date(dateStr);
+    return d.toLocaleString('ja-JP', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+};
+
 </script>
 
 <style scoped>

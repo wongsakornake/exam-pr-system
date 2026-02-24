@@ -10,11 +10,12 @@
                     <table class="w-full text-left border-collapse text-sm">
                         <thead>
                             <tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300"></th>
                                 <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Subject</th>
                                 <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Owner</th>
                                 <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Created At</th>
                                 <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Updated At</th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Send At</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Sent At</th>
                                 <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Status</th>
                                 <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300 text-right">Action</th>
                             </tr>
@@ -24,24 +25,27 @@
                                 <td colspan="4" class="px-6 py-10 text-center text-slate-400 text-sm">データがありません</td>
                             </tr> -->
                             <tr v-for="(item, index) in publicRelations.data" :key="item.id" class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                                <td class="px-6 py-4 text-sm font-mono text-slate-500 whitespace-nowrap">
+                                    {{ (publicRelations.current_page - 1) * publicRelations.per_page + index + 1 }}
+                                </td>
                                 <td class="px-6 py-4">
                                     <div class="font-medium text-slate-800 dark:text-slate-200">{{ item.subject }}</div>
-                                    <div class="text-xs text-slate-400 mt-1">Tokyo, Japan — [2026-02-22] — We are proud to announce the launch of "EcoStream," a revolutionary home water purification system designed to reduce plastic waste by 70%. Developed with advanced filtration technology from Japan, EcoStream offers pure, mineral-rich water while maintaining a sleek, minimalist design suitable for modern homes. Our mission is to provide clean water access while protecting our planet's oceans from single-use plastics. EcoStream will be available nationwide starting next month.</div>
+                                    <!-- <div class="text-xs text-slate-400 mt-1">{{ item.content }}</div> -->
                                 </td>
                                 <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
                                     user test
                                 </td>
                                  <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
-                                    23/02/2026
+                                    {{ formatDate(item.created_at) }}
                                 </td>
                                  <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
-                                    23/02/2026
+                                    {{ formatDate(item.updated_at) }}
                                 </td>
                                  <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
-                                    23/02/2026
+                                    {{ formatDate(item.sent_at) }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span :class="statusClass(item.status)">{{ item.statusText }}</span>
+                                    <span :class="statusClass(item.status)">{{ item.status }}</span>
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <button @click="openReviewModal(item)" 
@@ -119,5 +123,17 @@ const statusClass = (status) => {
     if (status === 'pending') return base + 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300';
     if (status === 'approved') return base + 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300';
     return base + 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400';
+};
+
+const formatDate = (dateStr) => {
+    if (!dateStr) return '-';
+    const d = new Date(dateStr);
+    return d.toLocaleString('ja-JP', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
 };
 </script>
