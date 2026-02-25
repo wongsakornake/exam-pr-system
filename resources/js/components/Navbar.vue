@@ -16,42 +16,61 @@
             </div>
 
             <div class="flex items-center gap-2 lg:gap-4">
-                <div class="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-1"></div>
-
-                <div class="flex items-center gap-3 pl-2 group cursor-pointer">
+                <div v-if="authUser" class="flex items-center gap-3 pl-2 group">
                     <div class="text-right hidden lg:block">
-                        <p class="text-xs font-bold text-slate-700 dark:text-slate-200">{{ mockUser.name }}</p>
-                        <p class="text-[10px] text-indigo-500 font-medium uppercase">{{ mockUser.role }}</p>
+                        <p class="text-xs font-bold text-slate-700 dark:text-slate-200">
+                            {{ authUser.name }}
+                        </p>
+                        <p class="text-[10px] text-indigo-500 font-medium uppercase">
+                            {{ userRole }}
+                        </p>
                     </div>
                     
                     <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold shadow-sm ring-2 ring-white dark:ring-slate-800">
-                        {{ mockUser.name.charAt(0) }}
+                        {{ authUser.name ? authUser.name.charAt(0).toUpperCase() : 'U' }}
                     </div>
                 </div>
+
+                <div class="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-1"></div>
+
+                <Link 
+                    href="/logout" 
+                    method="post" 
+                    as="button" 
+                    class="p-2 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-all duration-200"
+                    title="ログアウト"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                </Link>
             </div>
         </div>
     </header>
 </template>
 
 <script setup>
-import { Link, usePage } from '@inertiajs/vue3';
-import { computed, reactive } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3'; // เพิ่ม Link เข้ามา
+import { computed } from 'vue';
 
 const page = usePage();
 defineEmits(['toggle-sidebar']);
 
 /**
- * 1. ข้อมูล User จำลอง (Mock Data)
- * คุณสามารถเปลี่ยนค่าตรงนี้เพื่อดูการแสดงผลได้เลยครับ
+ * 1. ดึงข้อมูล User จาก Laravel Auth
  */
-const mockUser = reactive({
-    name: 'Piatec Developer',
-    role: 'Administrator', // หรือ 'Customer'
-    email: 'piatec@example.com'
+const authUser = computed(() => page.props.auth.user);
+
+/**
+ * 2. กำหนด Role แสดงผล
+ */
+const userRole = computed(() => {
+    if (page.url.startsWith('/admin')) return 'Administrator';
+    return 'Customer';
 });
 
 /**
- * 2. Dynamic Page Title
+ * 3. Dynamic Page Title
  */
 const pageTitle = computed(() => {
     const url = page.url;

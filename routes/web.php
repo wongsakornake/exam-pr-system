@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\PublicRelationController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return Inertia::render('Dashboard');
@@ -38,6 +39,11 @@ Route::get('example/send-email', function () {
         'canRegister' => Features::enabled(Features::registration()),
     ]);
 })->name('examSendEmail');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    // หน้าหลักรายการผู้ใช้, หน้าสร้าง, หน้าแก้ไข และลบ
+    Route::resource('users', UserController::class);
+});
 
 
 use App\Http\Controllers\EmailController;

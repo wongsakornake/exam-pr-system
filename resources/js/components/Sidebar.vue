@@ -86,6 +86,13 @@ const menuItems = [
         href: '/customer/public-relations/list', 
         icon: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-6 h-6' }, [h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M4 6h16M4 10h16M4 14h16M4 18h16' })])
     },
+    { 
+        label: 'ユーザー管理', 
+        href: '/admin/users', 
+        icon: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-6 h-6' }, [
+            h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z' })
+        ])
+    },
 ];
 import { h } from 'vue'; // สำหรับสร้าง Icon แบบ inline
 </script>
@@ -103,3 +110,69 @@ nav::-webkit-scrollbar-thumb {
     background: #1e293b;
 }
 </style>
+
+
+
+
+
+
+
+
+
+<!-- <script setup>
+import { ref, onMounted, computed, h } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+
+const isOpen = ref(true);
+const page = usePage();
+
+// ดึงข้อมูล User จากระบบ
+const user = computed(() => page.props.auth.user);
+
+onMounted(() => {
+    if (window.innerWidth < 1024) {
+        isOpen.value = false;
+    }
+});
+
+const isUrl = (url) => page.url.startsWith(url);
+
+/**
+ * ฟังก์ชันเช็คสิทธิ์ (ปรับเลข Role ตามใน DB ของคุณ)
+ * สมมติ: Admin = 1, Customer = 2
+ */
+const canAccess = (item) => {
+    if (!user.value) return false;
+    
+    const role = user.value.user_role;
+    
+    if (item.label === 'PRレビュー') return role === 1; // Admin เท่านั้น
+    if (item.label === 'PR 新規作成' || item.label === 'PR 一覧') return role === 2; // Customer เท่านั้น
+    
+    return true; 
+};
+
+const menuItems = [
+    { 
+        label: 'PRレビュー', 
+        href: '/admin/public-relations/review', 
+        icon: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-6 h-6' }, [h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4' })])
+    },
+    { 
+        label: 'PR 新規作成', 
+        href: '/customer/public-relations/create', 
+        icon: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-6 h-6' }, [h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M12 4v16m8-8H4' })])
+    },
+    { 
+        label: 'PR 一覧', 
+        href: '/customer/public-relations/list', 
+        icon: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', class: 'w-6 h-6' }, [h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M4 6h16M4 10h16M4 14h16M4 18h16' })])
+    },
+];
+</script>
+
+<style scoped>
+nav::-webkit-scrollbar { width: 4px; }
+nav::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+.dark nav::-webkit-scrollbar-thumb { background: #1e293b; }
+</style> -->

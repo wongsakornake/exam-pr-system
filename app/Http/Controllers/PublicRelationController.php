@@ -116,7 +116,9 @@ class PublicRelationController extends Controller
 
     public function review(){
         $publicRelations = PublicRelation::orderBy('created_at', 'desc')
+            ->with('file_attachments')
             ->paginate(10);
+        // dd($publicRelations);
 
         return Inertia::render('public-relations/review', [
             'publicRelations' => $publicRelations,

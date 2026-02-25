@@ -11,13 +11,13 @@
                         <thead>
                             <tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
                                 <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300"></th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Subject</th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Owner</th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Created At</th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Updated At</th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Sent At</th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">Status</th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300 text-right">Action</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">件名</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">所有者</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">作成日</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">更新日</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">配布スケジュール</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">状態</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300 text-right">アクション</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-800">

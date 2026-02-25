@@ -11,11 +11,20 @@
                         : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400',
                     index !== steps.length - 1 ? 'border-r border-white/10 dark:border-slate-700' : ''
                 ]">
-                    <span class="font-bold mr-2 text-sm"
+                    <span v-if="currentStep <= index + 1" class="font-bold mr-2 text-sm"
                         :class="currentStep >= index + 1 ? 'opacity-100' : 'opacity-60'">
                         {{ index + 1 }}.
                     </span>
+                    <svg v-if="currentStep > index + 1" class="mr-2 w-5 h-5 fill-current text-white"
+                        viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="211.344,306.703 160,256 128,288 211.414,368 384,176 351.703,144 " />
+                        <path d="M256,0C114.609,0,0,114.609,0,256s114.609,256,256,256s256-114.609,256-256S397.391,0,256,0z M256,472
+                        c-119.297,0-216-96.703-216-216S136.703,40,256,40s216,96.703,216,216S375.297,472,256,472z" />
+                    </svg>
+
                     <span class="font-medium text-xs sm:text-sm md:text-base">{{ step.title }}</span>
+
+
                 </div>
             </div>
 
@@ -49,7 +58,7 @@
                                     <h2 class="font-bold text-base md:text-lg">配信対象</h2>
                                     <span
                                         class="px-2.5 py-0.5 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-full text-[10px] font-black uppercase">{{
-                                        mediaReceivers.length }}件</span>
+                                            mediaReceivers.length }}件</span>
                                 </div>
                             </div>
                             <div class="overflow-y-auto max-h-[400px] relative">
@@ -274,7 +283,7 @@ const nextStep = () => {
             currentStep.value++;
         }
     } else {
- 
+
         submitForm();
     }
 };
@@ -287,18 +296,18 @@ const submitForm = () => {
     //     alert('すべての同意項目にチェックを入れてください');
     //     return;
     // }
-    
+
     if (mediaReceivers.value.length === 0) {
         alert('配信対象がいません。エリアを選択してください。');
         return;
     }
 
-    
+
     router.post('/customer/public-relations', {
         subject: form.subject,
         content: form.content,
         pdf_file: form.pdf_file,
-        scheduled_at: form.scheduled_time, 
+        scheduled_at: form.scheduled_time,
         media_ids: mediaReceivers.value.map(m => m.id),
     }, {
         forceFormData: true,

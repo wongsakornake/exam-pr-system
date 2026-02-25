@@ -23,49 +23,48 @@
                 class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-sm">
+                        
                         <thead>
-                            <tr
-                                class="bg-slate-50/80 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
-                                <th
-                                    class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-400 text-sm whitespace-nowrap">
-                                </th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-400 text-sm">タイトル
-                                </th>
-                                <th
-                                    class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-400 text-sm whitespace-nowrap">
-                                    予約/配信日時</th>
-                                <th
-                                    class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-400 text-sm whitespace-nowrap">
-                                    ステータス</th>
-                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300 text-right">
-                                    アクション</th>
+                            <tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300"></th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">件名</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">作成日</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">更新日</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">配布スケジュール</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300">状態</th>
+                                <th class="px-6 py-4 font-semibold text-slate-600 dark:text-slate-300 text-right">アクション</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100 dark:divide-slate-800/80">
-                            <tr v-if="filteredList.length === 0">
+                        <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                             <!-- <tr v-if="publicRelations.data.length === 0">
                                 <td colspan="4" class="px-6 py-10 text-center text-slate-400 text-sm">データがありません</td>
-                            </tr>
-                            <tr v-else v-for="(item, index) in publicRelations.data" :key="item.id">
+                            </tr> -->
+                            <tr v-for="(item, index) in publicRelations.data" :key="item.id" class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
                                 <td class="px-6 py-4 text-sm font-mono text-slate-500 whitespace-nowrap">
                                     {{ (publicRelations.current_page - 1) * publicRelations.per_page + index + 1 }}
                                 </td>
-                                <td class="px-6 py-4 text-sm font-medium text-slate-800 dark:text-slate-200">{{
-                                    item.subject }}</td>
-                                <td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400 whitespace-nowrap">
-                                    {{ formatDate(item.sent_at ?? item.created_at) }}
+                                <td class="px-6 py-4">
+                                    <div class="font-medium text-slate-800 dark:text-slate-200">{{ item.subject }}</div>
+                                    <!-- <div class="text-xs text-slate-400 mt-1">{{ item.content }}</div> -->
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span :class="statusStyle(item.status).badge">
-                                        <span :class="statusStyle(item.status).dot"></span>
-                                        {{ statusStyle(item.status).label }}
-                                    </span>
+                                 <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
+                                    {{ formatDate(item.created_at) }}
+                                </td>
+                                 <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
+                                    {{ formatDate(item.updated_at) }}
+                                </td>
+                                 <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
+                                    {{ formatDate(item.sent_at) }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span :class="statusClass(item.status)">{{ item.status }}</span>
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <button @click="goToEdit(item)"
                                         :disabled="item.status !== 'pending' && item.status !== 'reject'" :class="[
                                             'inline-flex items-center px-4 py-2 text-xs font-medium rounded transition-colors',
                                             (item.status === 'pending' || item.status === 'reject')
-                                                ? 'bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer'
+                                                ? 'bg-orange-600 hover:bg-orange-500 text-white cursor-pointer'
                                                 : 'bg-slate-200 text-slate-500 cursor-not-allowed opacity-60'
                                         ]">
                                         編集
@@ -119,6 +118,14 @@ const formatDate = (dateStr) => {
         hour: '2-digit',
         minute: '2-digit',
     });
+};
+
+// Status Styling Function
+const statusClass = (status) => {
+    const base = 'px-2.5 py-1 rounded text-[11px] font-bold ';
+    if (status === 'pending') return base + 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300';
+    if (status === 'approved') return base + 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300';
+    return base + 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400';
 };
 
 const goToEdit = (item) => {

@@ -33,8 +33,8 @@ class PublicRelation extends Model
         'created_uid' => 'integer',
     ];
 
-    public function attachments(): HasMany
+    public function file_attachments(): HasMany
     {
-        return $this->hasMany(PrDistributionAttachment::class, 'pr_distribution_id');
+        return $this->hasMany(PublicRelationFile::class, 'public_relation_id');
     }
 }
