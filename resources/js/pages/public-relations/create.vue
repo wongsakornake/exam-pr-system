@@ -24,7 +24,6 @@
 
                     <span class="font-medium text-xs sm:text-sm md:text-base">{{ step.title }}</span>
 
-
                 </div>
             </div>
 
@@ -151,30 +150,30 @@
 
                 <div v-if="currentStep === 3" class="p-6 sm:p-10">
                     <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 text-left">
-                        <div class="md:col-span-5 space-y-6">
+                        <div class="md:col-span-6 space-y-6">
                             <h2 class="text-lg font-bold flex items-center gap-2">配信日時</h2>
                             <div
                                 class="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                <input type="time" value="17:00"
-                                    class="w-full mt-4 p-3 rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-900" />
+                                <VDatePicker v-model="form.sent_at" mode="dateTime" :model-config="{
+                                    type: 'string',
+                                    mask: 'YYYY-MM-DD HH:mm:ss',
+                                }" :locale="{ id: 'ja', firstDayOfWeek: 1 }" is24hr expanded transparent borderless />
                             </div>
                         </div>
-                        <div class="md:col-span-7">
+                        <div class="md:col-span-6 space-y-6">
+                            <h2 class="text-lg font-bold flex items-center gap-2">各種同意チェック</h2>
                             <div
-                                class="bg-indigo-50/30 dark:bg-slate-800/40 border border-indigo-100 dark:border-slate-800 rounded-2xl p-6 sm:p-8">
-                                <h2 class="text-lg font-bold mb-6">各種同意チェック</h2>
-                                <div class="space-y-6">
-                                    <label v-for="i in 3" :key="i" class="flex gap-4 cursor-pointer group">
-                                        <input type="checkbox"
-                                            class="w-6 h-6 rounded border-slate-300 text-indigo-600 mt-1" />
-                                        <div class="flex-1">
-                                            <p class="font-bold text-sm group-hover:text-indigo-600">配信条件、公序良俗など</p>
-                                        </div>
-                                    </label>
-                                </div>
-                                <div class="mt-10 flex flex-col items-end gap-3">
-                                    <p class="text-2xl font-black text-indigo-600">2026年 2月 15日 17:00</p>
-                                </div>
+                                class="space-y-6 p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-800">
+                                <label v-for="i in 3" :key="i" class="flex gap-4 cursor-pointer group">
+                                    <input type="checkbox"
+                                        class="w-6 h-6 rounded border-slate-300 text-indigo-600 mt-1" />
+                                    <div class="flex-1">
+                                        <p class="font-bold text-sm group-hover:text-indigo-600">配信条件、公序良俗など</p>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="mt-10 flex flex-col items-end gap-3">
+                                <p class="text-2xl font-black text-indigo-600">{{ datetimeJpDisplay(form.sent_at) }}</p>
                             </div>
                         </div>
                     </div>
@@ -203,17 +202,17 @@ import { router } from '@inertiajs/vue3';
 import axios from 'axios';
 import MainLayout from '@/layouts/MainLayout.vue';
 
+
 const props = defineProps({
     areas: Array,
 });
-
 
 const form = reactive({
     media_receiver_ids: [],
     subject: '',
     content: '',
     pdf_file: null,
-    scheduled_time: '17:00',
+    sent_at: '',
     agreements: [false, false, false]
 });
 
@@ -307,7 +306,7 @@ const submitForm = () => {
         subject: form.subject,
         content: form.content,
         pdf_file: form.pdf_file,
-        scheduled_at: form.scheduled_time,
+        sent_at: form.sent_at,
         media_ids: mediaReceivers.value.map(m => m.id),
     }, {
         forceFormData: true,
@@ -325,4 +324,18 @@ const handleFileUpload = (event) => {
         alert('PDF形式のファイルを選択してください');
     }
 };
+
+const datetimeJpDisplay = (dateValue) => {
+    if (!dateValue) return '';
+    const d = new Date(dateValue);
+    
+    const year = d.getFullYear();
+    const month = d.getMonth() + 1;
+    const day = d.getDate();
+    const hours = d.getHours().toString().padStart(2, '0');
+    const minutes = d.getMinutes().toString().padStart(2, '0');
+
+    return `${year}年 ${month}月 ${day}日 ${hours}:${minutes}`;
+};
+
 </script>

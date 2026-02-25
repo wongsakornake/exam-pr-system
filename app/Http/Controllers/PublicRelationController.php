@@ -63,6 +63,8 @@ class PublicRelationController extends Controller
             $pr = PublicRelation::create([
                 'subject' => $request->subject,
                 'content' => $request->content,
+                'sent_at' => $request->sent_at,
+                'created_uid' => 1,
             ]);
 
             // 2. เชคกานอัพโลหดไฟล์
@@ -88,7 +90,7 @@ class PublicRelationController extends Controller
                     'subject' => $request->subject,
                     'detail' => $request->content,
                     'status' => 'pending',
-                    'sent_at' => $request->scheduled_at,
+                    'sent_at' => $request->sent_at,
                 ]);
         
             }
